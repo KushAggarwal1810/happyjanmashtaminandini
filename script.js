@@ -7,11 +7,16 @@ const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 let motionPaused = reducedMotion.matches;
 let soundOn = false;
 let awakened = false;
-let audioContext, musicAnalyser, musicSource, frequencyData;
+let audioContext, musicAnalyser, frequencyData;
+const audioSources = new Map();
 let audioRequest = 0;
 let musicEnergy = 0;
 const fluteAudio = $('#krishnaFlute');
+const finaleAudio = $('#finaleSong');
+let activeAudio = fluteAudio;
+let soundRequested = false;
 fluteAudio.volume = .55;
+finaleAudio.volume = .55;
 let diyaCount = 0;
 let sparkleCount = 0;
 let celebrationTimer;
@@ -34,7 +39,7 @@ function setMessage(message) { $('#sceneMessage').textContent = message; }
 // User-supplied recording. The analyser only reads playback, never a microphone.
 function getMusicEnergy() {
   let level = 0;
-  if (musicAnalyser && soundOn && !fluteAudio.paused) {
+  if (musicAnalyser && soundOn && !activeAudio.paused) {
     musicAnalyser.getByteFrequencyData(frequencyData);
     for (let i = 2; i < 70; i++) level += frequencyData[i];
     level /= 68 * 255;
@@ -43,18 +48,23 @@ function getMusicEnergy() {
   return musicEnergy;
 }
 function renderSound() {
+  const track = activeAudio === finaleAudio ? 'grand finale song' : 'Krishna flute';
   body.classList.toggle('sound-on', soundOn);
   $('#soundToggle').setAttribute('aria-pressed', String(soundOn));
-  $('#soundToggle').setAttribute('aria-label', soundOn ? 'Pause Krishna flute' : 'Play Krishna flute');
+  $('#soundToggle').setAttribute('aria-label', `${soundOn ? 'Pause' : 'Play'} ${track}`);
   $('#soundLabel').textContent = soundOn ? 'Sound on' : 'Sound off';
   $('#journeySound').setAttribute('aria-pressed', String(soundOn));
-  $('#journeySound').setAttribute('aria-label', soundOn ? 'Pause Krishna flute' : 'Play Krishna flute');
+  $('#journeySound').setAttribute('aria-label', `${soundOn ? 'Pause' : 'Play'} ${track}`);
+  $('.journey-sound-label').textContent = activeAudio === finaleAudio ? 'Song' : 'Flute';
 }
 async function setSound(enabled) {
   const request = ++audioRequest;
+  soundRequested = enabled;
+  const target = activeAudio;
   if (!enabled) {
     soundOn = false;
     fluteAudio.pause();
+    finaleAudio.pause();
     renderSound();
     return;
   }
@@ -63,31 +73,53 @@ async function setSound(enabled) {
     if (Audio && !audioContext) {
       try {
         audioContext = new Audio();
-        musicSource = audioContext.createMediaElementSource(fluteAudio);
-        musicSource.connect(audioContext.destination);
         musicAnalyser = audioContext.createAnalyser();
         musicAnalyser.fftSize = 256;
         musicAnalyser.smoothingTimeConstant = .8;
         frequencyData = new Uint8Array(musicAnalyser.frequencyBinCount);
-        musicSource.connect(musicAnalyser);
       } catch (_) { /* HTML audio still works when the analyser is unavailable. */ }
     }
+    if (audioContext && !audioSources.has(target)) {
+      const source = audioContext.createMediaElementSource(target);
+      source.connect(audioContext.destination);
+      if (musicAnalyser) source.connect(musicAnalyser);
+      audioSources.set(target, source);
+    }
     // Both operations begin during the click, preserving iPhone audio permission.
-    await Promise.all([audioContext ? audioContext.resume() : Promise.resolve(), fluteAudio.play()]);
-    if (request !== audioRequest) return;
-    soundOn = !fluteAudio.paused;
+    await Promise.all([audioContext ? audioContext.resume() : Promise.resolve(), target.play()]);
+    if (request !== audioRequest) {
+      if (target !== activeAudio || !soundRequested) target.pause();
+      return;
+    }
+    soundOn = !target.paused;
   } catch (_) {
     if (request !== audioRequest) return;
     soundOn = false;
-    fluteAudio.pause();
-    setMessage('Tap Sound to start your Krishna flute recording. The stars are ready either way.');
+    soundRequested = false;
+    target.pause();
+    setMessage('Tap Sound to start the music for this moment. The stars are ready either way.');
   }
   renderSound();
 }
-$('#soundToggle').addEventListener('click', () => setSound(!soundOn));
-$('#journeySound').addEventListener('click', () => setSound(!soundOn));
-fluteAudio.addEventListener('pause', () => { soundOn = false; renderSound(); });
-fluteAudio.addEventListener('error', () => { soundOn = false; renderSound(); setMessage('The flute recording could not load. You can still enjoy every surprise.'); });
+function setMusicScene(isFinale) {
+  const next = isFinale ? finaleAudio : fluteAudio;
+  if (next === activeAudio) return;
+  const resume = soundRequested;
+  const previous = activeAudio;
+  ++audioRequest;
+  activeAudio = next;
+  previous.pause();
+  if (isFinale) next.currentTime = 0;
+  soundOn = false;
+  renderSound();
+  setSound(resume);
+}
+$('#soundToggle').addEventListener('click', () => setSound(!soundRequested));
+$('#journeySound').addEventListener('click', () => setSound(!soundRequested));
+for (const audio of [fluteAudio, finaleAudio]) {
+  audio.addEventListener('pause', () => { if (audio === activeAudio && audio.paused) { soundOn = false; renderSound(); } });
+  audio.addEventListener('error', () => { if (audio === activeAudio) { soundOn = false; soundRequested = false; renderSound(); setMessage('This recording could not load. You can still enjoy every surprise.'); } });
+}
 
 function resizeCanvas() {
   const scale = Math.min(devicePixelRatio || 1, 2);
@@ -185,7 +217,7 @@ $('#journeyMotion').addEventListener('click', () => { motionPaused = !motionPaus
 reducedMotion.addEventListener('change', e => { motionPaused = e.matches; renderMotion(); });
 window.addEventListener('resize', resizeCanvas);
 document.addEventListener('visibilitychange', () => {
-  if (document.hidden) { cancelAnimationFrame(raf); raf = 0; if (soundOn) setSound(false); }
+  if (document.hidden) { cancelAnimationFrame(raf); raf = 0; if (soundRequested) setSound(false); }
   else startFrames();
 });
 

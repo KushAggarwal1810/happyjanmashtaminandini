@@ -141,6 +141,7 @@
   }
   function setFinale(value) {
     finale = value;
+    setMusicScene(value);
     dialog.classList.toggle('in-finale', value);
     document.querySelector('#finaleCopy').hidden = !value;
     dialog.setAttribute('aria-labelledby', value ? 'finaleTitle' : 'surpriseTitle');
@@ -181,6 +182,7 @@
     stage.scrollTop = 0;
     dialog.querySelector('[data-close]').focus({ preventScroll: true });
   });
+  dialog.addEventListener('close', () => setMusicScene(false));
   new ResizeObserver(() => { if (dialog.open) { resize(); resizeConstellation(); } }).observe(stage);
   selectPhoto(0);
 })();
