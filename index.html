@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#071419">
+  <meta name="description" content="A little Vrindavan, a sky full of wishes, and a special Janmashtami greeting for Nandini.">
+  <meta property="og:title" content="Happy Janmashtami, Nandini ✦">
+  <meta property="og:description" content="Kanha’s flute, a sky full of wishes, and a little universe made just for you.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://kushaggarwal1810.github.io/happyjanmashtaminandini/">
+  <meta property="og:image" content="https://kushaggarwal1810.github.io/happyjanmashtaminandini/assets/krishna-moonlight.png">
+  <title>A little Vrindavan for Nandini ✦</title>
+  <link rel="icon" href="assets/feather.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css?v=2">
+  <link rel="stylesheet" href="experience.css?v=2">
+  <link rel="stylesheet" href="gentle-motion.css?v=1">
+  <script src="script.js?v=4" defer></script>
+  <script src="experience.js?v=3" defer></script>
+  <script src="living-art.js?v=2" defer></script>
+</head>
+<body>
+  <audio id="krishnaFlute" src="assets/krishna-flute.mp3" preload="metadata" loop></audio>
+  <svg class="symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <symbol id="feather" viewBox="0 0 48 60"><path d="M12 56C21 42 30 25 33 9M18 44C-3 24 17-4 34 5c21 13 7 37-16 39Z"/><path d="M22 33C6 24 20 6 31 12s9 22-9 21Z"/><ellipse cx="26" cy="23" rx="5" ry="7" transform="rotate(25 26 23)"/></symbol>
+    <symbol id="sparkle" viewBox="0 0 24 24"><path d="m12 2 2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5Z"/></symbol>
+    <symbol id="diya" viewBox="0 0 36 36"><path d="M4 22h28c-2 12-26 12-28 0Z"/><path d="M18 20C7 16 19 3 19 3s10 15-1 17Z"/><path d="M4 22c5 3 23 3 28 0"/></symbol>
+    <symbol id="wish" viewBox="0 0 36 36"><path d="m18 3 4 10 11 1-8 8 2 11-9-6-9 6 2-11-8-8 11-1Z"/></symbol>
+    <symbol id="letter" viewBox="0 0 36 36"><rect x="3" y="8" width="30" height="22" rx="2"/><path d="m4 10 14 11 14-11M4 29l10-10m18 10L22 19"/></symbol>
+  </defs></svg>
+  <div class="ambient" aria-hidden="true"></div>
+  <canvas id="sky" aria-hidden="true"></canvas>
+  <div class="site-shell">
+    <header class="topbar">
+      <a class="brand" href="#home" aria-label="Nandini's little Vrindavan, home"><svg><use href="#feather"/></svg><span>A LITTLE VRINDAVAN<small>made with love, for Nandini</small></span></a>
+      <div class="settings">
+        <button id="motionToggle" class="setting" aria-label="Pause animations" aria-pressed="false" title="Pause animations"><span id="motionIcon" aria-hidden="true">Ⅱ</span><span class="setting-label" id="motionLabel">Motion</span></button>
+        <button id="soundToggle" class="setting" aria-label="Play melody" aria-pressed="false"><span class="equalizer" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span id="soundLabel">Sound off</span></button>
+      </div>
+    </header>
+    <main id="home">
+      <section class="hero" aria-labelledby="title">
+        <div class="hero-art" id="heroArt">
+          <img src="assets/krishna-moonlight.png" width="1536" height="1024" alt="Krishna playing his flute beside a moonlit river, surrounded by lotus flowers, glowing diyas and a peacock." fetchpriority="high">
+          <canvas id="livingArt" class="living-art" aria-hidden="true"></canvas>
+          <div class="moon-halo" aria-hidden="true"></div>
+          <div class="water-shimmer" aria-hidden="true"></div>
+          <div id="riverLights" class="river-lights" aria-hidden="true"></div>
+          <div class="art-caption" aria-hidden="true"><span></span> where a little magic lives <span></span></div>
+        </div>
+        <div class="intro">
+          <p class="eyebrow"><span></span> A JANMASHTAMI SURPRISE</p>
+          <h1 id="title">A little Vrindavan.<br>Just for you,<br><em>Nandini.</em></h1>
+          <p class="intro-copy">Some people deserve a whole universe of happiness.<br class="desktop-break"> So, I made you a tiny one.</p>
+          <div class="main-action">
+            <button id="magicButton" class="gold-button"><svg aria-hidden="true"><use href="#sparkle"/></svg><span id="magicLabel">Let the magic begin</span><span class="arrow" aria-hidden="true">↗</span></button>
+            <p class="action-hint" id="actionHint">Kanha’s flute. A sky just for you. Tap to step inside.</p>
+          </div>
+        </div>
+        <div class="scene-note"><span class="tiny-star">✦</span><p>May Kanha keep your heart light<br>and your beautiful smile even brighter.</p></div>
+      </section>
+      <section class="rituals" aria-labelledby="ritualTitle">
+        <div class="ritual-heading"><span class="rule"></span><h2 id="ritualTitle">Three little things, just for you</h2><span class="rule"></span></div>
+        <div class="ritual-grid">
+          <button class="ritual" id="diyaButton"><span class="ritual-icon"><svg aria-hidden="true"><use href="#diya"/></svg></span><span class="ritual-copy"><small>01 / A LITTLE LIGHT</small><strong>Light 3 diyas</strong><span>One click · three little wishes for you</span></span><span class="ritual-arrow" aria-hidden="true">↗</span></button>
+          <button class="ritual" id="wishButton"><span class="ritual-icon"><svg aria-hidden="true"><use href="#wish"/></svg></span><span class="ritual-copy"><small>02 / A LITTLE HOPE</small><strong>Send a wish to the sky</strong><span>Some dreams are worth whispering</span></span><span class="ritual-arrow" aria-hidden="true">↗</span></button>
+          <button class="ritual" id="noteButton"><span class="ritual-icon"><svg aria-hidden="true"><use href="#letter"/></svg></span><span class="ritual-copy"><small>03 / A LOT OF LOVE</small><strong>A note for Nandini</strong><span>Something I wanted you to know</span></span><span class="ritual-arrow" aria-hidden="true">↗</span></button>
+        </div>
+      </section>
+      <div class="quiet-message" role="status" aria-live="polite"><svg aria-hidden="true"><use href="#sparkle"/></svg><p id="sceneMessage">Take a breath. This little corner of the universe is yours.</p></div>
+    </main>
+    <footer><span>HAPPY JANMASHTAMI, NANDINI</span><span>crafted with a little magic & a whole lot of heart <b>♡</b></span></footer>
+  </div>
+  <div id="celebration" class="celebration" aria-hidden="true"><span>for a heart as lovely as yours</span><strong>Happy Janmashtami,<br><em>Nandini.</em></strong><i>✦</i></div>
+  <dialog id="wishDialog" aria-labelledby="wishTitle">
+    <div class="dialog-top"><span>A LITTLE HOPE</span><button class="close-button" data-close aria-label="Close wish">✕</button></div>
+    <div class="dialog-content"><svg class="dialog-symbol" aria-hidden="true"><use href="#wish"/></svg><p class="eyebrow centered">JUST BETWEEN YOU & THE SKY</p><h2 id="wishTitle">What is your heart<br><em>wishing for?</em></h2><p>Nandini, aankhein band kar… aur dil se ek wish maang.<br>Jo bhi hai, I hope it finds its way to you. 🤍</p>
+      <form id="wishForm"><label for="wishText">Your wish <span>(or keep it in your heart)</span></label><textarea id="wishText" rows="3" maxlength="400" placeholder="Dear Kanha, a little wish…"></textarea><p class="privacy-note">Only for this moment. Your wish isn’t saved or sent anywhere.</p><button type="submit" class="gold-button"><svg aria-hidden="true"><use href="#sparkle"/></svg>Release my wish<span aria-hidden="true">↗</span></button></form>
+    </div>
+  </dialog>
+  <dialog id="surpriseDialog" class="surprise-dialog" aria-labelledby="surpriseTitle">
+    <div class="dialog-top"><span>A UNIVERSE WITH YOUR NAME ON IT</span><div class="dialog-controls"><button class="setting" id="journeySound" aria-label="Pause flute" aria-pressed="false"><span class="equalizer" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="journey-sound-label">Flute</span></button><button class="setting" id="journeyMotion" aria-label="Pause animations">Ⅱ</button><button class="close-button" data-close aria-label="Close your constellation">✕</button></div></div>
+    <div class="constellation-stage" id="constellationStage">
+      <canvas id="constellationCanvas" aria-hidden="true"></canvas>
+      <div class="surprise-heading"><p class="eyebrow centered" id="journeyEyebrow">THE WORLD GETS A LITTLE SOFTER WHEN YOU SMILE</p><h2 id="surpriseTitle">Even the stars<br>have a <em>favourite.</em></h2></div>
+      <div class="portal-area"><canvas id="featherPortal" aria-hidden="true"></canvas><span class="portal-caption" id="portalCaption">a peacock feather, woven from starlight</span></div>
+      <div class="memory-orbit" id="memoryOrbit" aria-label="Three portraits of Nandini">
+        <figure class="memory-card" data-memory="0"><div class="memory-frame"><img src="assets/nandini-colours.jpeg" width="1040" height="1560" alt="Nandini in a teal outfit and colourful floral dupatta beside marigold decorations"><span class="photo-corner" aria-hidden="true">✦</span></div><figcaption>a little grace, a lot of magic</figcaption></figure>
+        <figure class="memory-card" data-memory="1"><div class="memory-frame"><img src="assets/nandini-tulips.jpeg" width="1169" height="1458" alt="Nandini with a bicycle among pink tulips, with mountains in the background"><span class="photo-corner" aria-hidden="true">✦</span></div><figcaption>even the flowers have competition</figcaption></figure>
+        <figure class="memory-card" data-memory="2"><div class="memory-frame"><img src="assets/nandini-sunshine.jpeg" width="671" height="1600" alt="Nandini smiling in a yellow outfit with silver earrings against a festive backdrop"><span class="photo-corner" aria-hidden="true">✦</span></div><figcaption>sunshine, with the sweetest smile</figcaption></figure>
+      </div>
+      <div class="memory-navigation"><button class="orbit-arrow" id="previousMemory" aria-label="Previous photo">←</button><div class="memory-dots" aria-label="Choose a photo"><button data-photo="0" aria-label="Photo 1, festive colours" aria-pressed="true"></button><button data-photo="1" aria-label="Photo 2, among the tulips" aria-pressed="false"></button><button data-photo="2" aria-label="Photo 3, sunshine smile" aria-pressed="false"></button></div><button class="orbit-arrow" id="nextMemory" aria-label="Next photo">→</button></div>
+      <div class="surprise-bottom"><p class="signature-name">Nandini</p><p id="memoryWish">Kanha se bas itni si dua hai…<br><strong>teri yeh smile hamesha aise hi rahe.</strong></p><p class="sparkle-status" id="sparkleStatus" role="status">Move your finger through the stars. This sky responds to you.</p></div>
+      <section class="finale-copy" id="finaleCopy" hidden aria-labelledby="finaleTitle"><p class="eyebrow centered">IF GOOD WISHES COULD BECOME A UNIVERSE…</p><h3 id="finaleTitle">This one would<br>always be <em>yours.</em></h3><p class="finale-wish" id="finaleWish" aria-live="polite">Nandini, may Kanha fill your days with sukoon, your heart with hope, and your life with people who treasure you.</p><p class="finale-personal">Aur jab kabhi duniya thodi zyada lage…<br>yaad rakhna, koi hai jo dil se teri khushi chahta hai. 🤍</p><p class="finale-signoff">Happy Janmashtami, meri pyaari Nandini.</p></section>
+    </div>
+    <div class="journey-dock"><div class="journey-actions gallery-dock"><button class="gold-button" id="sparkleButton"><svg aria-hidden="true"><use href="#sparkle"/></svg>More starlight</button><button class="outline-button" id="finaleButton">Your grand finale <span aria-hidden="true">↗</span></button></div><div class="journey-actions finale-dock"><button class="gold-button" id="moreBlessings">A little more love <span aria-hidden="true">♡</span></button><button class="outline-button" id="replayJourney">← Back to photos</button></div></div>
+  </dialog>
+  <dialog id="noteDialog" aria-labelledby="noteTitle">
+    <div class="dialog-top"><span>SEALED WITH A LITTLE LOVE</span><button class="close-button" data-close aria-label="Close note">✕</button></div>
+    <div class="dialog-content note-content"><svg class="dialog-symbol" aria-hidden="true"><use href="#feather"/></svg><p class="eyebrow centered">FOR MY VERY SPECIAL PERSON</p><h2 id="noteTitle">Dear <em>Nandini,</em></h2>
+      <div class="letter-body"><p>Happy Janmashtami. 🤍</p><p>Aaj Kanha se apne liye kuch nahi maanga.<br>Bas tere liye thoda sa extra sukoon, bahut saari khushiyaan… aur woh wali smile jo teri aankhon tak pahunchti hai.</p><p>I hope the things you quietly pray for find their way to you. I hope the days that feel heavy become a little gentler. And I hope you never forget how much happiness your presence brings into someone else’s life. Mine, especially.</p><p>Tu na, sabki tension le leti hai. Aaj thodi si Kanha ko de de. Aur thoda sa khud ko bhi woh pyaar de, jo tu itni easily sabko deti hai.</p><p class="letter-highlight">May your life have the warmth of a diya,<br>the calm of a moonlit sky,<br>and a thousand little reasons to smile.</p><p>Aur haan, madam ji… itna pyaara sa Vrindavan sirf tere liye banaya hai. Ab ek acchi si smile toh banti hai na? 😌</p><p>Always in your corner,<br><strong>Your partner in nonsense ♡</strong></p></div>
+      <button id="noteCelebrate" class="gold-button"><svg aria-hidden="true"><use href="#sparkle"/></svg>Okay, smiling now!<span aria-hidden="true">♡</span></button>
+    </div>
+  </dialog>
+  <noscript><p class="noscript">Happy Janmashtami, Nandini! Enable JavaScript to light diyas, release a wish and open your note.</p></noscript>
+</body>
+</html>

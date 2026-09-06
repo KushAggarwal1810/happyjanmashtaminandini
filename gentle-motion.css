@@ -1,0 +1,14 @@
+/* Nandini's edition: slower visual pacing, with music at its original speed. */
+.memory-card{transition-duration:1.8s,1.2s,1.2s}
+.surprise-dialog[open]{animation-duration:1.3s}
+.finale-copy{animation-duration:2.2s}
+.memory-frame:after{animation-duration:14s}
+.constellation-stage:before{animation-duration:34s}
+.moon-halo{animation-duration:14s}
+.water-shimmer{animation-duration:16s}
+.floating-diya{animation-duration:14s}
+.floating-diya:before{animation-duration:2.4s}
+.sound-on .equalizer i{animation-duration:1.8s}
+.sparkling .memory-frame,.is-blooming .memory-frame,.finale-copy.is-blooming h3{animation-duration:3.6s}
+.sparkling .signature-name{animation-duration:4s}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
